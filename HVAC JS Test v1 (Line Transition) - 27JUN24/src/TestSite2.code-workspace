@@ -1,0 +1,39 @@
+{
+	"folders": [
+		{
+			"name": "TestSite2",
+			"path": "../../TestSite2"
+		},
+		{
+			"name": "TestSite3",
+			"path": "../../TestSite3"
+		},
+		{
+			"name": "TestSite4",
+			"path": "../../TestSite4"
+		},
+		{
+			"name": "HVAC JS Test v1",
+			"path": "../../HVAC JS Test v1"
+		},
+		{
+			"name": "HVAC JS Test v2",
+			"path": "../../HVAC JS Test v2"
+		},
+		{
+			"path": "../../HVAC JS Test v1 (Line Transition)"
+		},
+		{
+			"path": "../../HVAC JS Test v1 (Line Transition) - Copy"
+		},
+		{
+			"path": "../../HVAC JS Test v1 (Line Transition) - 25JUN24"
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "HVAC JS Test v1 (Line Transition) - 27JUN24"
+	}
+}
