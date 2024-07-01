@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d3 line chart</title>
+    <style>
+      rect {
+        pointer-events: all;
+        fill-opacity: 0;
+        z-index: 1;
+      }
+
+    </style>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+<body>
+    <h1>Test for d3 transition</h1>
+    <div id="chart-container"></div>
+    
+    <!-- Include the D3.js library-->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Include my custom script file-->
+    <script src="src/main.js"></script>
+
+    <!-- button for transition effects -->
+    
+    <div class="container" style="text-align: left;">
+      <h3>Select Variable</h3>
+      <select id = 'selectField'>
+        <option disabled hidden selected>Select</option>
+        <option id = option1 value="energyUsage">Energy Usage</option>
+        <option id = option2 value="temp">Outside Air Temp</option>
+      </select>
+    </div>
+    
+  </body>
+</html>
