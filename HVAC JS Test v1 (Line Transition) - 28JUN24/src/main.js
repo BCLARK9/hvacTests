@@ -15,6 +15,7 @@ const svg = d3.select("#chart-container")
   .append("svg")
   .attr("width", width + margin.left + margin.right)
   .attr("height", height + margin.top + margin.bottom)
+  .class("chart")
   .append("g")
   .attr("transform", `translate(${margin.left},${margin.top})`);
 
@@ -42,14 +43,7 @@ let fieldInfo = {
 
 let data; //Global variable
 
-document.addEventListener('DOMContentLoaded', (event) => { // Wait for the DOM to be fully loaded
-
-d3.csv("Sample_HVAC.csv").then(function(loadedData) {
-    
-  data = loadedData; //Assign the loaded data to the global variable
-
-  //Parse the data and convert to numbers
-
+function cleanData(data){
   const parseDate = d3.timeParse("%m/%d/%Y");
   data.forEach((d, i) => {
     d.date = parseDate(d.date);
@@ -78,6 +72,16 @@ d3.csv("Sample_HVAC.csv").then(function(loadedData) {
     d.DailyTempF = +d.DailyTempF; //convert new "NaN" values to numbers
     }) //end if: temperature range check
       
+    return data;
+      
+  }
+
+function initializeChart(loadedData) {
+    
+  data = cleanData(loadedData); //Assign the loaded data to the global variable
+
+  //Parse the data and convert to numbers
+
 console.log(data);
 
   //Add the x-axis
@@ -142,12 +146,23 @@ console.log(data);
       .attr("y", 0 - margin.left)
       .attr("x", 0 - height / 2)
       .attr("dy", "1em")
-      .style("text-anchor", "middle")
-      .style("font-size", "14px")
-      .style("fill", "#777")
-      .style("font-family", "sans-serif")
       .text("");
 
+  //Add chart title
+  svg.append("text")
+    .attr("class", "chart-title")
+    .attr("x", margin.left - 115)
+    .attr("y", margin.top - 100)
+    .text("Example Building Energy Trend");
+
+  //Add source credit
+  svg.append("text")
+    .attr("class", "source-credit")
+    .attr("x", width - 1125)
+    .attr("y", height + margin.bottom - 3)
+    .text("Source: Anonymized Army Data");
+
+      // Create a line as a path object
     //Define the initial line function
 
     let line = d3.line()
@@ -159,30 +174,13 @@ console.log(data);
     svg.append("path") //append the path element
       .data([data]) //bind the data to the path element
       .attr("id", "pathGen") //assign an id to the path element
-      .attr("fill", "none") 
-      .attr("stroke", "steelblue")
-      .attr("opacity", 0.2)  
+      .classed("lineChart", true)
       .attr("d", line); //call the line function  
 
-}); //end function: d3.csv load
+}
 
-//retrieve html drop-down selection on change
+function updateChart(fieldKey) {
 
-let selection = document.querySelector('#selectField')
-
-selection.addEventListener('change', () => {
-
-    let fieldKey = selection.value; // Define fieldKey as the selected value
-
-    //console log to verify proper retrieval
-
-    displayLine(fieldKey); // Call the displayLine function with the selected value
-
-  }); //end event listener: drop-down selection
-  
-//Define the displayLine function to help with transitions using fieldKey selection
-
-function displayLine(fieldKey) {
 
     let { fieldName, formatter, min, max, yLabel } = fieldInfo[fieldKey];
     let xSitionT = 1250; //transition time in milliseconds
@@ -246,27 +244,11 @@ svg.select("#yTitle")
     .attr("d", line)
     .call((g) => g.select(".domain").remove());
 
-} //End of displayLine function
+} //End of updateChart function
 
-}); //end event listener: DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => d3.csv("Sample_HVAC.csv").then(data => initializeChart(data)));
 
-//Add additional chart details
+//retrieve html drop-down selection on change
 
-  //Add chart title
-  svg.append("text")
-    .attr("class", "chart-title")
-    .attr("x", margin.left - 115)
-    .attr("y", margin.top - 100)
-    .style("font-size", "24px")
-    .style("font-weight", "bold")
-    .style("font-family", "sans-serif")
-    .text("Example Building Energy Trend");
-
-  //Add source credit
-  svg.append("text")
-    .attr("class", "source-credit")
-    .attr("x", width - 1125)
-    .attr("y", height + margin.bottom - 3)
-    .style("font-size", "9px")
-    .style("font-family", "sans-serif")
-    .text("Source: Anonymized Army Data");
+let selection = document.querySelector('#selectField');
+selection.addEventListener('change', (event) => {updateChart(event.value)});
