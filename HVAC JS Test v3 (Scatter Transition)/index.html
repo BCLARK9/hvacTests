@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>d3 scatter chart</title>
+
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+
+<body>
+    <h1>Hello!  Scatter plot HVAC data test</h1>
+    <div id="chart-container"></div>
+    
+    <div class="container" style="text-align: left;">
+      <h3>Select Year</h3>
+      <select id = 'selectYear'>
+        <option id = option1 value="2019">2019</option>
+        <option id = option2 value="2020">2020</option>
+        <option id = option2 value="2021">2021</option>
+        <option id = option2 value="2022">2022</option>
+      </select>
+    </div>
+
+    <!-- Include the D3.js library-->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <!-- Include my custom script file-->
+    <script src="src/main.js"></script>
+  </body>
+</html>
