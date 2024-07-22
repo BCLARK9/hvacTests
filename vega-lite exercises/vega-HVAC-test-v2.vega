@@ -1,0 +1,21 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "A scatterplot showing an example HVAC relationship between temp and building kWh",
+  "width": "container",
+  "height": "container",
+  "autosize": "fit-y",
+  "data": {
+    "url": "https://raw.githubusercontent.com/BCLARK9/hvacTests/main/HVAC%20JS%20Test%20v3%20(Scatter%20Transition)/Sample_HVAC.csv"
+  },
+  "params": [
+    {
+      "name": "regionofinterest",
+      "select": {"type": "interval", "encodings": ["x"]}
+    }
+  ],
+  "mark": "point",
+  "encoding": {
+    "x": {"field": "DailyTempF", "type": "quantitative"},
+    "y": {"field": "kWh", "type": "quantitative"}
+  }
+}

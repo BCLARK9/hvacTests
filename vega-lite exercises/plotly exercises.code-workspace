@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "../plotly exercises"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "HVAC JS Test v3 (Scatter Transition)",
+		"git.ignoreLimitWarning": true
+	}
+}

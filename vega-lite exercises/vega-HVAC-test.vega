@@ -1,0 +1,44 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/BCLARK9/hvacTests/main/HVAC%20JS%20Test%20v3%20(Scatter%20Transition)/Sample_HVAC.csv"
+  },
+  "width": "container",
+  "height": "container",
+  "autosize": "fit-y",
+  "hconcat": [
+    {
+      "params": [
+        {
+          "name": "regionofinterest",
+          "select": {"type": "interval", "encodings": ["x"]}
+        }
+      ],
+      "mark": "line",
+      "encoding": {
+        "x": {"field": "date", "type": "temporal"},
+        "y": {"field": "kWh", "type": "quantitative"}
+      }
+    },
+    {
+      "layer": [
+        {
+          "mark": "bar",
+          "encoding": {
+            "x": {"field": "kWh", "type": "quantitative", "bin": true},
+            "y": {"aggregate": "count", "type": "quantitative"},
+            "color": {"value":"grey"}
+          }
+        },
+        {
+          "transform": [{"filter": {"param": "regionofinterest"}}],
+          "mark": "bar",
+          "encoding": {
+            "x": {"field": "kWh", "type": "quantitative", "bin": true},
+            "y": {"aggregate": "count", "type": "quantitative"}
+          }
+        }
+      ]
+    }
+  ]
+}
